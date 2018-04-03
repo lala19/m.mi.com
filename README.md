@@ -20,6 +20,7 @@
 
 * 路由：'/cart'
 * 组件：
+
     |组件名|路径|
     |-|-|
     |购物车|entry/compoents/cart.vue|
