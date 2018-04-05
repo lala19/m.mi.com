@@ -4,7 +4,7 @@
             <li v-for="item in product" :key="item.id" class="item">
                 <div class="content">
                     <div class="choose" :class="item.isChecked?'checked':'unchecked'" @click="checked(item)"></div>
-                    <a href="javascript:void(0);" class="imgProduct">
+                    <a href="#/commodity" class="imgProduct">
                         <img :src="item.src">
                     </a>
                     <div class="info">
@@ -38,7 +38,7 @@
                     <div class="i2">
                         <span v-text="' 意外保障服务 '+item.insurance+'元'"></span>
                     </div>
-                    <div class="i3">
+                    <div class="i3" @click="open(item.insurance)">
                         <span>选购</span>
                     </div>
                 </div>
@@ -61,6 +61,7 @@
 
 <style lang="less">
     .cart-list {
+        background: #fff;
         .item {
             border-bottom: 1px solid #f6f6f6;
             line-height: 0;
@@ -76,11 +77,11 @@
                     height: 0.9rem;
                 }
                 .checked {
-                    background: url(../images/cart/checked.png) 50% 50% no-repeat;
+                    background: url(../../images/cart/checked.png) 50% 50% no-repeat;
                     background-size: 0.2rem 0.2rem;
                 }
                 .unchecked {
-                    background: url("../images/cart/unchecked.png") 50% 50% no-repeat;
+                    background: url("../../images/cart/unchecked.png") 50% 50% no-repeat;
                     background-size: 0.2rem .2rem;
                 }
                 .imgProduct {
@@ -141,7 +142,7 @@
                                     }
                                 }
                                 i {
-                                    background-image: url("../images/cart/icon-sub.png");
+                                    background-image: url("../../images/cart/icon-sub.png");
                                 }
                             }
                             .input-num {
@@ -167,7 +168,7 @@
                                     }
                                 }
                                 i {
-                                    background-image: url("../images/cart/icon-add.png");
+                                    background-image: url("../../images/cart/icon-add.png");
                                 }
                             }
                         }
@@ -183,7 +184,7 @@
                                 background-repeat: no-repeat;
                                 background-position: 50%;
                                 background-size: cover;
-                                background-image: url("../images/cart/delete.png")
+                                background-image: url("../../images/cart/delete.png")
                             }
                         }
                     }
@@ -255,9 +256,17 @@
     export default {
         data() {
             return {
-                imgSrc: [require("../images/cart/insurance.png")],
+                imgSrc: [require("../../images/cart/insurance.png")],
                 product: [{
-                        src: require("../images/cart/pms.jpg"),
+                        src: require("../../images/cart/pms3.jpg"),
+                        name: "小米MIX 2 全网通版 8GB内存 全陶瓷尊享版 黑色",
+                        price: "3899",
+                        num: 1,
+                        max: 5,
+                        insurance: 279,
+                        isChecked: true
+                    }, {
+                        src: require("../../images/cart/pms.jpg"),
                         name: "小米5X 全网通版 4GB内存 红色",
                         price: 1499,
                         num: 1,
@@ -266,7 +275,7 @@
                         isChecked: true
                     },
                     {
-                        src: require("../images/cart/pms2.jpg"),
+                        src: require("../../images/cart/pms2.jpg"),
                         name: "红米5 Plus 全网通版 3GB内存 黑色",
                         price: 999,
                         num: 1,
@@ -278,29 +287,65 @@
             }
         },
         methods: {
+            //判断购物车是否为空,底部是否为结算模块
+            isEmpty() {
+                if (this.product.length != 0) { //若有商品列表
+                    this.$store.state.bEmpty = false;
+                    this.$store.state.bFooter = false;
+                } else {
+                    this.$store.state.bEmpty = true;
+                    this.$store.state.bFooter = true;
+                }
+            },
             // 更改选中状态
             checked(item) {
                 item.isChecked = !item.isChecked;
+                item.num = 0;
+                this.calc();
             },
             // 减少物品
             sub(item) {
                 if (item.num != 1) { //若物品数不为1
                     item.num--;
+                    this.calc();
                 }
             },
             // 增加物品
             add(item) {
                 if (item.num != item.max) { //若物品数不为1
                     item.num++;
-                } else {
-                    alert("max");
+                    this.calc();
+                } else { //弹出遮罩层
+                    this.$store.state.bMax = true;
+                    var timer = setTimeout(() => {
+                        this.$store.state.bMax = false;
+                        clearTimeout(timer);
+                    }, 2000);
                 }
             },
             // 删除物品
             del(item) {
                 this.product.splice(item, 1);
-
+                this.isEmpty();
+                this.calc();
+            },
+            // 计算数量价格
+            calc() {
+                this.$store.state.total = 0;
+                this.$store.state.prices = 0;
+                for (const item of this.product) {
+                    this.$store.state.total += item.num;
+                    this.$store.state.prices += item.num * item.price;
+                }
+            },
+            // 打开选购窗口
+            open(insurance) {
+                this.$store.state.bClose = false;
             }
+        },
+        mounted() {
+            this.isEmpty();
+            this.calc();
         }
     }
 </script>

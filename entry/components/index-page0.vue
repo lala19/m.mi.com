@@ -1,7 +1,8 @@
 <template>
     <div>
+        <autoplay />
         <ul class="nav-list">
-            <li v-for="(item,index) in navArr" :key="index"><a href="javascript:void(0)"><img :src="item.imgSrc" /></a></li>
+            <li v-for="(item,index) in this.$store.state.navlist" :key="index"><a href="javascript:void(0)"><img :src="item.img_url" /></a></li>
         </ul>
         <div class="newShop">
             <div class="newShop-left"><a href="javascript:void(0)"><img src="../images/indeximages/shop001.jpg" /></a></div>
@@ -180,26 +181,10 @@
 
 <script>
 import newOrder from "./module/index-newOrder.vue"
+import autoplay from "./index-autoplay.vue"
 export default {
   data() {
     return {
-      navArr: [
-        {
-          imgSrc: require("../images/indeximages/nav1.jpg")
-        },
-        {
-          imgSrc: require("../images/indeximages/nav2.jpg")
-        },
-        {
-          imgSrc: require("../images/indeximages/nav3.jpg")
-        },
-        {
-          imgSrc: require("../images/indeximages/nav4.jpg")
-        },
-        {
-          imgSrc: require("../images/indeximages/nav5.jpg")
-        }
-      ],
       shangouArr: [
         {
           imgSrc: require("../images/indeximages/shangou001.webp"),
@@ -240,7 +225,8 @@ export default {
     };
   },
   components:{
-      newOrder
+      newOrder,
+      autoplay
   }
 };
 </script>
@@ -251,7 +237,6 @@ export default {
   height: 0.8rem;
   align-items: center;
   justify-content: space-around;
-  margin-top: 0.84rem;
   border-top: 0.01rem solid #d8d6d2;
 }
 .nav-list li a img {

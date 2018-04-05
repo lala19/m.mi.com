@@ -5,7 +5,7 @@
         <div class="header_title">
             <p v-text="'优惠券列表'"></p>
         </div>
-        <a href="" class="header_search"><img src="../../images/user/icon/icon_03.jpg" alt=""></a>
+        <a href="#/search" class="header_search"><img src="../../images/user/icon/icon_03.jpg" alt=""></a>
     </header>
         <ul class="order_tab_con">
             <li :class="{'curr':status}">
@@ -39,7 +39,7 @@ export default {
   },
   mounted() {
     var str = window.location.href;
-    if (str.split("#")[1] == "/user/coupon") {
+    if (str.split("#")[1] == "/coupon") {
       this.$store.state.discounts_active = false;
     }
   }

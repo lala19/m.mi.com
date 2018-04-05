@@ -3,7 +3,7 @@
     <div class="empty-cart">
         <a href="javascript:void(0);">
             <span>购物车还是空的</span>
-            <em>去逛逛1</em>
+            <em>去逛逛</em>
         </a>
     </div>
 </template>
@@ -20,7 +20,7 @@
             background-size: auto 100%;
             padding: 0 .08rem 0 .48rem;
             color: rgba(0, 0, 0, .27);
-            background: url("../images/cart/cartbg.png") no-repeat 0;
+            background: url("../../images/cart/cartbg.png") no-repeat 0;
             background-size: auto 100%;
         }
         em {

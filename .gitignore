@@ -1,2 +1,13 @@
 node_modules
 output
+swiper
+
+# IntelliJ
+.idea
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
