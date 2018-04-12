@@ -14,6 +14,10 @@ app.use(bodyParser.json())
 // app.use('/insertclassfiy', insertclassfiy);//插入信息
 // var insertproduct = require('./insert/insertproduct.js');
 // app.use('/insertproduct', insertproduct);//插入产品类别
+// var insertgoodsinfo = require('./insert/insertgoodsinfo.js');
+// app.use('/insertgoodsinfo', insertgoodsinfo);//插入产品类别
+// var fotges = require('./insert/fotges.js');
+// app.use('/fotges', fotges);
 
 var services = require('./router/services.js');
 app.use('/services', services);//服务
@@ -27,6 +31,8 @@ var indexinfo = require('./router/indexinfo.js');
 app.use('/indexinfo', indexinfo);//主页信息获取
 var sign = require('./router/sign.js');
 app.use('/sign', sign);//登录注册
+var goodsinfo = require('./router/goodsinfo.js');
+app.use('/goodsinfo', goodsinfo);//商品信息
 
 app.set('jsonp callback name', 'JSON_CALLBACK');
 app.listen(6789);

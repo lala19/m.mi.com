@@ -28,10 +28,11 @@ import services from "./components/module/services.vue";
 import mihome from "./components/module/mihome.vue";
 import fcodepipe from "./components/module/fcodepipe.vue";
 import setting from "./components/module/setting.vue";
+import login_phone from "./components/login_or_register/login_phone.vue";
+import login_user from "./components/login_or_register/login_user.vue";
+import register from "./components/login_or_register/register.vue";
 
-
-
-import classfiy from "./components/classfiy.vue" // 导入分类页
+import classfiy from "./components/classfiy.vue"; // 导入分类页
 
 import search from "./components/public/search.vue";
 const router = new VueRouter({
@@ -81,6 +82,18 @@ const router = new VueRouter({
             path: "/commodity", //详情页
             component: commodity
         }
+        , {
+            path: "/loginphone", //手机登录
+            component: login_phone
+        }
+        , {
+             path: "/loginuser", //用户登录
+             component: login_user
+         }
+         , {
+            path: "/register", //注册
+            component: register
+        }
     ]
     // （缩写）相当于 routes: routes
 });
@@ -115,7 +128,9 @@ const store = new Vuex.Store({
         bClose: true, //默认不显示选购窗口
 		homedata:[],//主页数据
 		navlist:[],
-        homeimg:[]
+        homeimg:[],
+        goodsinfo:{},
+        pages:[]
     },
     //获取值得方法
     getters: {}
