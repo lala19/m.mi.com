@@ -1,10 +1,10 @@
 <template>
-    <div id="commodity">
+    <div id="commodity" v-if="loadstatus">
         <comm-content :page="page"></comm-content>
         <comm-footer/>
+        <success-addcart />
     </div>
 </template>
-
 <style lang="less" scoped>
 
 </style>
@@ -12,16 +12,19 @@
 <script>
 import comm_content from "./commodity/comm_content.vue";
 import comm_footer from "./commodity/comm_footer.vue";
+import success from './commodity/success.vue';
 import $ from "jquery";
 export default {
   data() {
     return {
-      page: []
+      page: [],
+      loadstatus:false
     }
   },
   components: {
     "comm-content": comm_content,
-    "comm-footer": comm_footer
+    "comm-footer": comm_footer,
+    "success-addcart":success
   },
   mounted() {
     var str = window.location.href.split("?")[1].split("=")[1];
@@ -34,11 +37,9 @@ export default {
       }
     }).then(function(res) {
       //.product_info.name
+      //console.log(JSON.parse(res)[0])
       var obj = JSON.parse(res)[0];
-      if (obj.activies) {
-        obj.activies = JSON.parse(obj.activies);
-      }
-      if (obj.buy_option) {
+      if (obj.buy_option!="[]") {
         obj.buy_option = JSON.parse(obj.buy_option);
       }
       if (obj.coupon_info) {
@@ -69,8 +70,9 @@ export default {
         });
       }
       self.page=newArr;
-      console.log(111)
-      console.log(self.page)
+      // console.log(111)
+      // console.log(self.page)
+      self.loadstatus=true
     });
   }
 };
