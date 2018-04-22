@@ -38,7 +38,6 @@
 							</div>							
                         </div>
                     </div>
-                    <!---->
                 </div>
 
             </div>
@@ -126,7 +125,6 @@ export default {
       this.a = result;
       //console.log(this.a);
     }
-    //console.log(JSON.parse(this.a[0].items)[0].action.path)
     //获取分类
     if (!sessionStorage.getItem("classfiytype")) {
       var self = this;
@@ -164,17 +162,6 @@ export default {
       }, 1300);
       this.offset = resarr;
     });
-    //    $$(this.$refs.list).on("scroll", function() {
-    // 	//   var str = $$(this.$refs.list).scrollTop();
-    // 	//   console.log(this.offset)
-    //     //   var st=this.offset.sort(function(a, b) {
-    //     //     return Math.abs(a - str) - Math.abs(b - str);
-    // 	//   })[0];
-    // 	//console.log(st)
-    // 	});
-    // this.$refs.list.onscroll=function(){
-    // 	console.log(this.$refs.list.offsetTop)
-    // }
   },
   methods: {
     scrollim() {
@@ -182,8 +169,6 @@ export default {
       var arr = this.offset;
       var index = 0;
       var arr1 = [];
-      //console.log(scroll);
-      //console.log(arr);
       for (var i = 0; i < arr.length; i++) {
         arr1.push({
           id: i,
